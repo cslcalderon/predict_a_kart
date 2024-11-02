@@ -1,9 +1,9 @@
-Name,weight,acceleration ,top_speed,handling,choco_island,vanilla_lake_perf,donut_plains_perf,koopa_beach_perf,rainbow_road_perf
-mario,0,0,1,0,-1,2,0,-1,
-luigi,0,0,1,0,-1,2,0,-1,
-princess,0,2,0,-1,1,-1,2,1,
-yoshi,0,2,0,-1,1,-1,2,1,
-bowser,1,-1,2,0,0,1,-1,2,
-donkey_kong_jr,1,-1,2,0,0,1,-1,2,
-koopa_troopa,-1,1,-1,1,2,0,1,1,
-toad,-1,1,-1,1,2,0,1,1,
+Name,weight,acceleration,top_speed,handling,choco_island,vanilla_lake_perf,donut_plains_perf,koopa_beach_perf,rainbow_road_perf
+mario,0,0,1,0,-1,2,0,-1, 0
+luigi,0,0,1,0,-1,2,0,-1, 0
+princess,0,2,0,-1,1,-1,2,1, 0
+yoshi,0,2,0,-1,1,-1,2,1, 1
+bowser,2,-1,2,0,0,1,-1,2, 2
+donkey_kong_jr,1,-1,2,0,0,1,-1,2, 2
+koopa_troopa,-1,1,-1,1,2,0,1,1, -1
+toad,-1,1,-1,1,2,0,1,1, -1
