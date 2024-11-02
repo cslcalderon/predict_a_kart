@@ -1,0 +1,17 @@
+---
+title: "mario_kart"
+output: html_document
+date: "2024-11-02"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(tidyverse)
+library(dplyr)
+```
+
+```{r}
+players <- read.csv("Super Mario Kart Data - Players.csv")
+power_ups <- read.csv("Super Mario Kart Data - PowerUps.csv")
+maps <- read.csv("Super Mario Kart Data - Maps.csv")
+```

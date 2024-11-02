@@ -4,11 +4,15 @@ class Character:
         self.acceleration = acceleration
         self.top_speed = top_speed
         self.handling = handling
-        self.choco_island = ci
-        self.vanilla_lake = vl
-        self.donut_plains = dp
-        self.koopa_beach = kb
-        self.rainbow_road = rr
+        self.map_perf = {
+            "choco_island": ci,
+            "vanilla_lake": vl,
+            "donut_plains": dp,
+            "koopa_beach": kb,
+            "rainbow_road": rr
+        }
+        self.powerups = []
+        self.win_stat = 0
 
     # Getter methods
     def get_weight(self):
@@ -23,20 +27,11 @@ class Character:
     def get_handling(self):
         return self.handling
 
-    def get_ci(self):
-        return self.choco_island
-
-    def get_vl(self):
-        return self.vanilla_lake
-
-    def get_dp(self):
-        return self.donut_plains
-
-    def get_kb(self):  
-        return self.koopa_beach
-
-    def get_rr(self):
-        return self.rainbow_road
+    def get_map_perf(self, map_name):
+        return self.map_perf.get(map_name, None)  
+    
+    def set_win_stat(self, win_change):
+        self.win_stat += win_change
 
     def __str__(self):
         return str(self.weight)
