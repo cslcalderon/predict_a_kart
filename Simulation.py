@@ -215,6 +215,55 @@ class Simulation():
             'Power-Ups 1': powerups_1,
             'Power-Ups 2': powerups_2
         }
+    
+    def return_all_data(self):
+    
+        effective_acc_1 = self.calc_effective_acceleration(self.character1, self.race_map)
+        effective_speed_1 = self.calc_effective_speed(self.character1, self.race_map)
+        effective_acc_2 = self.calc_effective_acceleration(self.character2, self.race_map)
+        effective_speed_2 = self.calc_effective_speed(self.character2, self.race_map)
+    
+        winner = self.return_winner()
+        if isinstance(winner, str):  
+            final_outcome = "Tie"
+        else:
+            final_outcome = winner.get_name()
+    
+        powerups_1 = self.character1.get_powerups()
+        powerups_2 = self.character2.get_powerups()
+
+        character1_stats = {
+            'Name': self.character1.get_name(),
+            'Weight': self.character1.get_weight(),
+            'Acceleration': self.character1.get_acceleration(),
+            'Top Speed': self.character1.get_top_speed(),
+            'Handling': self.character1.get_handling(),
+            'On Road Traction': self.character1.get_on_road_traction(),
+            'Mini Turbo': self.character1.get_mini_turbo(),
+        }
+
+        character2_stats = {
+            'Name': self.character2.get_name(),
+            'Weight': self.character2.get_weight(),
+            'Acceleration': self.character2.get_acceleration(),
+            'Top Speed': self.character2.get_top_speed(),
+            'Handling': self.character2.get_handling(),
+            'On Road Traction': self.character2.get_on_road_traction(),
+            'Mini Turbo': self.character2.get_mini_turbo(),
+        }
+
+        return {
+            'Character 1 Stats': character1_stats,
+            'Character 2 Stats': character2_stats,
+            'Outcome': final_outcome,
+            'Effective Acceleration 1': effective_acc_1,
+            'Effective Acceleration 2': effective_acc_2,
+            'Effective Speed 1': effective_speed_1,
+            'Effective Speed 2': effective_speed_2,
+            'Power-Ups 1': powerups_1,
+            'Power-Ups 2': powerups_2
+        }
+
 
 
 
