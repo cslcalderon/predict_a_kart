@@ -8,7 +8,8 @@ MAPS = load_maps()
 st.title("Predict-a-Kart 🏎️")
 
 character1_name = st.selectbox("Select Character 1", options=list(CHARACTERS.keys()))
-character2_name = st.selectbox("Select Character 2", options=list(CHARACTERS.keys()))
+character2_options = [name for name in CHARACTERS.keys() if name != character1_name]
+character2_name = st.selectbox("Select Character 2", options=character2_options)
 
 map_name = st.selectbox("Select Map", options=list(MAPS.keys()))
 
