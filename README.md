@@ -69,9 +69,10 @@ We’re just getting started! Consider adding:
 
 ---
 
-## 🤝 Contributing
+## 🤝 Contributing & Running
 
 Feel free to fork this repo and submit pull requests for improvements! Let’s make Mario Kart simulations even more exciting! 🥳
+You can also run our preliminary UI when you download our project and run the command `streamlit run app_ui.py`
 
 ---
 
