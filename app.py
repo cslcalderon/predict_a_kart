@@ -7,60 +7,12 @@ import csv
 CHARACTERS = load_characters()
 MAP_DATA = load_maps()
 
-#ask for user input 
-#run the model 
-#give final verdict 
-
-#could call UI in here
 
 my_simulation = Simulation(CHARACTERS['toad'], CHARACTERS['bowser'], MAP_DATA['choco_island'])
 my_simulation.return_winner()
 
 num_simulations = 1000
 results = []
-
-# for i in range(num_simulations):
-#     character1, character2 = sample(list(CHARACTERS.values()), 2) #no repeats
-#     while character1 == character2: 
-#         character2 = choice(list(CHARACTERS.values()))
-#     race_map_key = choice(list(MAP_DATA.keys()))  
-#     race_map = MAP_DATA[race_map_key]
-
-#     my_simulation = Simulation(character1, character2, race_map)
-#     final_results = my_simulation.return_all_scores()
-#     winner = my_simulation.return_winner()
-
-#     if isinstance(winner, str):  
-#         final_outcome = "Tie"
-#     else:
-#         final_outcome = winner.get_name()
-
-#     results.append({
-#         'Character 1': character1.get_name(),
-#         'Character 2': character2.get_name(),
-#         'Map': race_map_key,  
-#         'Outcome': final_outcome, 
-#         'Character 1 Base': final_results[0],
-#         'Character 2 Base': final_results[1],
-#         'Character 1 Map': final_results[2],
-#         'Character 2 Map': final_results[3],
-#         'Character 1 Final': final_results[4],
-#         'Character 2 Final': final_results[5], 
-#         'Character 1 PU': final_results[6],
-#         'Character 2 PU': final_results[7],
-
-#     })
-
-# with open('simulation_results.csv', mode='w', newline='') as file:
-#     writer = csv.DictWriter(file, fieldnames=['Character 1', 'Character 2', 'Map', 'Outcome', \
-#                                               'Character 1 Base', 'Character 2 Base', \
-#                                               'Character 1 Map', 'Character 2 Map', \
-#                                               'Character 1 Final', 'Character 2 Final', \
-#                                               'Character 1 PU', 'Character 2 PU'])
-#     writer.writeheader()
-#     writer.writerows(results)
-
-# print("Simulation results saved to simulation_results.csv")
 
 
 for _ in range(num_simulations):
@@ -89,20 +41,17 @@ num_simulations = 1000
 results = []
 
 for i in range(num_simulations):
-    character1, character2 = sample(list(CHARACTERS.values()), 2)  # Select two different characters
+    character1, character2 = sample(list(CHARACTERS.values()), 2) 
     race_map_key = choice(list(MAP_DATA.keys()))  
     race_map = MAP_DATA[race_map_key]
 
     simulation = Simulation(character1, character2, race_map)
-    all_data = simulation.return_all_data()  # Use return_all_data to get all stats including character details
+    all_data = simulation.return_all_data()  
     
-    # Add map key for easier identification
     all_data['Map'] = race_map_key  
     
-    # Append results for this simulation run
     results.append(all_data)
 
-# Define the fieldnames for the CSV output, including character stats
 fieldnames = [
     'Character 1', 'Weight 1', 'Acceleration 1', 'Top Speed 1', 'Handling 1', 'On Road Traction 1', 'Mini Turbo 1',
     'Character 2', 'Weight 2', 'Acceleration 2', 'Top Speed 2', 'Handling 2', 'On Road Traction 2', 'Mini Turbo 2',
