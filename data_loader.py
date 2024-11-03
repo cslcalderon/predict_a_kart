@@ -18,12 +18,12 @@ def load_maps(filename='Super Mario Kart Data - Maps.csv'):
             map_name = row['map']
             obstacles = row['obstacles']
             slipperiness = int(row['slipperiness'])
-            terrain = row['terrain']
+            terrain = row['curvy']
             
             if map_name in map_dicts:
                 map_dicts[map_name]['obstacles'] = obstacles
                 map_dicts[map_name]['slipperiness'] = slipperiness
-                map_dicts[map_name]['terrain'] = terrain
+                map_dicts[map_name]['curvy'] = terrain
 
     return map_dicts
 
@@ -62,8 +62,10 @@ def load_characters(filename='Super Mario Kart Data - Players.csv'):
             dp = int(row['donut_plains_perf'])
             kb = int(row['koopa_beach_perf'])
             rr = int(row['rainbow_road_perf'])
+            on_road_traction = int(row['on_road_traction'])
+            mini_turbo = int(row['mini_turbo'])
             
-            character = Character(weight, acceleration, top_speed, handling, ci, vl, dp, kb, rr)
+            character = Character(name, weight, acceleration, top_speed, handling, ci, vl, dp, kb, rr, on_road_traction, mini_turbo)
             characters[name] = character
     
     return characters

@@ -1,6 +1,6 @@
-map,obstacles,slipperiness,terrain
-choco_island,mud,3,land
-vanilla_lake,water,4,water
-donut_plains,water,2,land
-koopa_beach,water,3,water
-rainbow_road,crushers,1,air
+map,obstacles,slipperiness,curvy
+choco_island,mud,3,yes
+vanilla_lake,water,4,no
+donut_plains,water,2,yes
+koopa_beach,water,3,no
+rainbow_road,crushers,5,yes
