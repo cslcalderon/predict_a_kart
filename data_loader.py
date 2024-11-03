@@ -41,7 +41,7 @@ def load_power_ups(filename='Super Mario Kart Data - PowerUps.csv'):
             rr = int(row['rainbow_road'])
             speed_related = row['speed_related'].strip().lower() == 'yes'
             
-            power_up = PowerUp(ci, vl, dp, kb, rr, speed_related)
+            power_up = PowerUp(name, ci, vl, dp, kb, rr, speed_related)
             power_ups[name] = power_up
     
     return power_ups

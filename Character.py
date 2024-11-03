@@ -44,7 +44,14 @@ class Character:
         return self.mini_turbo
  
     def add_powerup(self, powerup):
-        self.powerups += powerup
+        self.powerups.append(powerup) 
+
+    def get_powerups(self):
+        powerup_names = []
+        for pu in self.powerups:
+            powerup_names.append(pu.get_name())
+
+        return powerup_names
     
     def set_win_stat(self, win_change):
         self.win_stat += win_change
