@@ -32,5 +32,5 @@ class PowerUp():
         return self.speed_related
     
     def get_probability_for_map(self, map_name):
-        return self.probabilities.get(map_name, 0)
+        return self.probabilities.get(map_name, 0) / 7
         
