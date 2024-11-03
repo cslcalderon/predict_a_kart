@@ -90,14 +90,26 @@ class Simulation():
         final_score = (baseline_score * 0.6) + (map_score * 0.4) 
         return final_score
 
+    def return_all_scores(self):
+        baseline_score_1 = self.calc_player_baseline(self.character1)
+        baseline_score_2 = self.calc_player_baseline(self.character2)
+
+        map_score_1 = self.calc_map_perf(self.character1, self.race_map)
+        map_score_2 = self.calc_map_perf(self.character2, self.race_map)
+
+
+        score1 = self.calculate_total_performance(self.character1)
+        score2 = self.calculate_total_performance(self.character2)
+
+        # print(f"{self.character1.get_name()}: {score1}")
+        # print(f"{self.character2.get_name()}: {score2}")
+
+        return [baseline_score_1, baseline_score_2, map_score_1, map_score_2, score1, score2]
 
     def return_winner(self):
         #baseline, map_score, power_ups, probability
         score1 = self.calculate_total_performance(self.character1)
         score2 = self.calculate_total_performance(self.character2)
-
-        print(f"{self.character1.get_name()}: {score1}")
-        print(f"{self.character2.get_name()}: {score2}")
 
         if score1 > score2:
             return self.character1
