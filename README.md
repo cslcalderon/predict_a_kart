@@ -6,8 +6,9 @@ Welcome to **Predict-a-Kart** – a Mario Kart-inspired simulation where charact
 
 ## 📋 Project Overview & Figma 
 
-Predict-a-Kart simulates epic battles between iconic Mario Kart characters across different maps! This simulation uses character stats, map-specific physics, and power-ups to determine who will cross the finish line first. You can run thousands of simulations, dive into physics-based results, and explore exciting CSV outputs! 📊
-Figma: 
+Predict-a-Kart simulates epic battles between iconic Mario Kart characters across different maps! This simulation uses character stats, map-specific physics, and power-ups to determine who will cross the finish line first. You can run thousands of simulations, dive into physics-based results, and explore exciting CSV outputs! 
+
+📊Figma: 
 ### Features
 - 🏁 **Race Simulations**: Pit characters like Toad 🐸 and Bowser 🐢 against each other on maps like Choco Island 🍫 and Rainbow Road 🌈!
 - ⚙️ **Character & Map Data**: Each character has unique stats – from speed to handling, while each map has challenges like slipperiness and curves.
