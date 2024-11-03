@@ -6,35 +6,65 @@ MAP_DATA = load_maps()
 POWER_UPS = load_power_ups()
 CHARACTERS = load_characters()
 
+POWERUP_OBT_PROB = 0.80
+HIT_PROB = 0.30
+
+
 class Simulation():
-    def __init__(self, character1, character2, map):
+    def __init__(self, character1, character2, race_map):
         self.character1 = character1
         self.character2 = character2
-        self.map = map
+        self.race_map = race_map
 
-    def calc_player_baseline(character_name):
+    def calc_player_baseline(self, character_name):
         weight = character_name.get_weight()
         acc = character_name.get_acceleration()
         top_speed = character_name.get_top_speed()
         handling = character_name.get_handling()
+        on_road_traction = character_name.get_on_road_traction()
+        mini_turbo = character_name.get_mini_turbo()
 
-        win_statistic = (weight + acc + top_speed + handling) * 0.6
-        return win_statistic
 
-    def calc_map_perf(character_name, map):
-        map_perf = character_name.get_map_perf(map) * 0.20
+        baseline = (weight + acc + top_speed + handling + on_road_traction + mini_turbo) / 55
+        print(f"{character_name.get_name()} baseline performance: {baseline}")
 
-    def give_randon_power_ups(character_name):
+        return baseline
+
+    def calc_map_perf(self, character, race_map):
+        if race_map['curvy'] == "yes":
+            handling_weight = 0.4
+            traction_weight = 0.3
+        else:
+            handling_weight = 0.2
+            traction_weight = 0.2
+
+        slipperiness_weight = race_map['slipperiness'] / 5  
+        traction_weight += slipperiness_weight * 0.2
+        handling_weight += slipperiness_weight * 0.1
+        
+        remaining_weight = 1 - (handling_weight + traction_weight)
+        acceleration_weight = remaining_weight / 2
+        speed_weight = remaining_weight / 2
+
+        map_perf = ((character.get_handling() * handling_weight +
+                character.get_on_road_traction() * traction_weight +
+                character.get_acceleration() * acceleration_weight +
+                character.get_top_speed() * speed_weight)) / 40
+        
+        print(f"{character.get_name()} map performance: {map_perf}")
+
+        return map_perf
+
+
+    def give_random_power_ups(self, character_name):
         for _ in range(3):
             random_key = random.choice(list(POWER_UPS.keys()))
             power_up = POWER_UPS[random_key]
+            character_name.add_powerup(power_up)
             if power_up.get_speed_related == "yes":
                 return 2 * 0.20
             else: 
                 return 1 * 0.20
-
-    def calc_win_after_powerup(powerups):
-        pass
 
     def calc_defense_offense(player_one, player_two):
     #passing in characters
@@ -52,27 +82,29 @@ class Simulation():
         pass 
 
 
+    def calculate_total_performance(self, character):
+        baseline_score = self.calc_player_baseline(character)
+        map_score = self.calc_map_perf(character, self.race_map)
+        #powerup_score = self.calc_powerup_perf(character)
+
+        final_score = (baseline_score * 0.6) + (map_score * 0.4) 
+        return final_score
 
 
-    def calculate_effective_speed(character, track_type):
-    # Set weightings based on track type
-        if track_type == 'straight':
-            speed_weight = 1.2
-            acceleration_weight = 0.8
-        elif track_type == 'curvy':
-            speed_weight = 0.8
-            acceleration_weight = 1.2
-        elif track_type == 'obstacle_rich':
-            speed_weight = 1.0
-            acceleration_weight = 1.5
+    def return_winner(self):
+        #baseline, map_score, power_ups, probability
+        score1 = self.calculate_total_performance(self.character1)
+        score2 = self.calculate_total_performance(self.character2)
+
+        print(f"{self.character1.get_name()}: {score1}")
+        print(f"{self.character2.get_name()}: {score2}")
+
+        if score1 > score2:
+            return self.character1
+        elif score2 > score1:
+            return self.character2
         else:
-        # Default weights
-            speed_weight = 1.0
-            acceleration_weight = 1.0
+            return "It's a tie!"
 
-    # Calculate effective speed
-        effective_speed = (character.get_top_speed() * speed_weight +
-                       character.get_acceleration() * acceleration_weight)
-        return effective_speed
 
 

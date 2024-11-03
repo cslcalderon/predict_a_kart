@@ -1,5 +1,6 @@
 class Character:
-    def __init__(self, weight, acceleration, top_speed, handling, ci, vl, dp, kb, rr):
+    def __init__(self, name, weight, acceleration, top_speed, handling, ci, vl, dp, kb, rr, on_road_traction, mini_turbo):
+        self.name = name
         self.weight = weight
         self.acceleration = acceleration
         self.top_speed = top_speed
@@ -14,7 +15,13 @@ class Character:
         self.powerups = []
         self.win_stat = 0
 
+        self.on_road_traction = on_road_traction
+        self.mini_turbo = mini_turbo
+
     # Getter methods
+    def get_name(self):
+        return self.name
+    
     def get_weight(self):
         return self.weight
 
@@ -28,7 +35,16 @@ class Character:
         return self.handling
 
     def get_map_perf(self, map_name):
-        return self.map_perf.get(map_name, None)  
+        return self.map_perf.get(map_name, None) 
+
+    def get_on_road_traction(self):
+        return self.on_road_traction
+
+    def get_mini_turbo(self):
+        return self.mini_turbo
+ 
+    def add_powerup(self, powerup):
+        self.powerups += powerup
     
     def set_win_stat(self, win_change):
         self.win_stat += win_change
