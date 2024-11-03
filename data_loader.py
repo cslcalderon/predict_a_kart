@@ -2,15 +2,10 @@
 import csv
 from Character import Character
 from PowerUp import PowerUp
+from Map import Map
 
 def load_maps(filename='Super Mario Kart Data - Maps.csv'):
-    map_dicts = {
-        'choco_island': {},
-        'vanilla_lake': {},
-        'donut_plains': {},
-        'koopa_beach': {},
-        'rainbow_road': {}
-    }
+    maps = {}
     
     with open(filename, mode='r') as csvfile:
         reader = csv.DictReader(csvfile)
@@ -18,14 +13,13 @@ def load_maps(filename='Super Mario Kart Data - Maps.csv'):
             map_name = row['map']
             obstacles = row['obstacles']
             slipperiness = int(row['slipperiness'])
-            terrain = row['curvy']
+            curvy = row['curvy']
             
-            if map_name in map_dicts:
-                map_dicts[map_name]['obstacles'] = obstacles
-                map_dicts[map_name]['slipperiness'] = slipperiness
-                map_dicts[map_name]['curvy'] = terrain
+            map_obj = Map(name=map_name, obstacles=obstacles, slipperiness=slipperiness, curvy=curvy)
+            maps[map_name] = map_obj
 
-    return map_dicts
+    return maps
+    
 
 def load_power_ups(filename='Super Mario Kart Data - PowerUps.csv'):
     power_ups = {}
