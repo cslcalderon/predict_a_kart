@@ -12,5 +12,5 @@ MAP_DATA = load_maps()
 
 #could call UI in here
 
-my_simulation = Simulation(CHARACTERS['yoshi'], CHARACTERS['bowser'], MAP_DATA['rainbow_road'])
+my_simulation = Simulation(CHARACTERS['toad'], CHARACTERS['bowser'], MAP_DATA['choco_island'])
 my_simulation.return_winner()
