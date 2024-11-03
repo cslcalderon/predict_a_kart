@@ -35,7 +35,7 @@ class Simulation():
     def calc_effective_acceleration(self, character, race_map):
         mass = character.get_weight()
         base_acc = character.get_acceleration()
-        slipperiness = race_map['slipperiness']  
+        slipperiness = race_map.get_slipperiness()
 
         friction_coefficient = max(0.1, 1 - (slipperiness / 10))  
         frictional_force = friction_coefficient * mass
@@ -49,7 +49,7 @@ class Simulation():
     def calc_effective_speed(self, character, race_map):
         mass = character.get_weight()
         base_speed = character.get_top_speed()
-        curvy = race_map['curvy'] == "yes"
+        curvy = race_map.get_curvy() == "yes"
 
         speed_penalty = 0.8 if curvy else 1.0  
         effective_speed = base_speed * speed_penalty
@@ -65,7 +65,7 @@ class Simulation():
         effective_acc = self.calc_effective_acceleration(character, race_map)
         effective_speed = self.calc_effective_speed(character, race_map)
     
-        if race_map['curvy'] == "yes":
+        if race_map.get_curvy() == "yes":
             total_performance = (effective_acc * 0.6) + (effective_speed * 0.4)
         else:
             total_performance = (effective_acc * 0.4) + (effective_speed * 0.6)
@@ -74,14 +74,14 @@ class Simulation():
         return total_performance
 
     def calc_map_perf(self, character, race_map):
-        if race_map['curvy'] == "yes":
+        if race_map.get_curvy() == "yes":
             handling_weight = 0.4
             traction_weight = 0.3
         else:
             handling_weight = 0.2
             traction_weight = 0.2
 
-        slipperiness_weight = race_map['slipperiness'] / 5  
+        slipperiness_weight = race_map.get_slipperiness() / 5  
         traction_weight += slipperiness_weight * 0.2
         handling_weight += slipperiness_weight * 0.1
         
@@ -99,42 +99,41 @@ class Simulation():
         return map_perf
 
 
-    def calc_powerup_perf(self, character):
-        powerup_effect = 0  
-
-        for _ in range(3): 
-            if random.random() < POWERUP_OBT_PROB:  
-                random_key = random.choice(list(POWER_UPS.keys()))
-                power_up = POWER_UPS[random_key]
-                character.add_powerup(power_up) 
-
-                if power_up.get_speed_related():
-                    powerup_effect += 0.20  
-                else:
-                    powerup_effect += 0.10  
-
-        return powerup_effect
-    
     # def calc_powerup_perf(self, character):
     #     powerup_effect = 0  
 
-    #     for _ in range(3):  
+    #     for _ in range(3): 
     #         if random.random() < POWERUP_OBT_PROB:  
-    #             power_up = random.choice(list(POWER_UPS.values()))
-            
-    #             map_name = self.race_map['name'] 
-    #             power_up_probability = power_up.get_probability_for_map(map_name)
-            
-    #             if random.random() < power_up_probability:
-    #                 character.add_powerup(power_up) 
+    #             random_key = random.choice(list(POWER_UPS.keys()))
+    #             power_up = POWER_UPS[random_key]
+    #             character.add_powerup(power_up) 
 
-    #                 # Adjust the power-up effect based on whether it's speed-related
-    #                 if power_up.get_speed_related():
-    #                     powerup_effect += 0.20
-    #                 else:
-    #                     powerup_effect += 0.10
+    #             if power_up.get_speed_related():
+    #                 powerup_effect += 0.20  
+    #             else:
+    #                 powerup_effect += 0.10  
 
     #     return powerup_effect
+    
+    def calc_powerup_perf(self, character):
+        powerup_effect = 0  
+
+        for _ in range(3):  
+            if random.random() < POWERUP_OBT_PROB:  
+                power_up = random.choice(list(POWER_UPS.values()))
+            
+                map_name = self.race_map.get_name() 
+                power_up_probability = power_up.get_probability_for_map(map_name)
+            
+                if random.random() < power_up_probability:
+                    character.add_powerup(power_up) 
+
+                    if power_up.get_speed_related():
+                        powerup_effect += 0.20
+                    else:
+                        powerup_effect += 0.10
+
+        return powerup_effect
 
 
 
